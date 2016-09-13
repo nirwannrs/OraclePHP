@@ -1,29 +1,44 @@
 <html>
 <head>
-	<title>Tambah Motor</title>
+	<title>Tambah Barang</title>
 </head>
 <body>
-<a href = "view_motor.php"><b><- Batal</a>
+
+<script>
+function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>
+
+<a href = "view_barang.php"><b><- Kembali</a>
 <form method="post" action="simpan.php">
 <center>
 <table border="0" width = "50%" cellpadding = "8">
 <tr>
-	<th colspan="3" align="center">Tambah Data Motor</th>
+	<th colspan="3" align="center">Tambah Data Barang</th>
 </tr>
 <tr>
-	<td>ID Motor</td>
+	<td>Kode Barang</td>
 	<td> : </td>
-	<td><input type="text" name="idmotor"></td>
+	<td><input type="text" name="kdbarang" style="width:150px;"></td>
 </tr>
 <tr>
-	<td>Nama Motor</td>
+	<td>Nama Barang</td>
 	<td> : </td>
-	<td><input type="text" name="nama"></td>
+	<td><input type="text" name="nama" style="width:150px;"></td>
 </tr>
 <tr>
-	<td>Merk</td>
+	<td>Stok</td>
 	<td> : </td>
-	<td><input type="text" name="merk"></td>
+	<td><input type="number" name="stok" onkeypress="return isNumberKey(event)" style="width:150px;"></td>
+</tr>
+<tr>
+	<td>Harga</td>
+	<td> : </td>
+	<td><input type="text" name="harga" onkeypress="return isNumberKey(event)" style="width:150px;"></td>
 </tr>
 <tr>
 	<td colspan="3" align="center">

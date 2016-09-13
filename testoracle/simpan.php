@@ -1,23 +1,25 @@
 <?php
 include "koneksi.php";
 
-$idmotor = $_POST['idmotor'];
-$nama = $_POST['nama'];
-$merk = $_POST['merk'];
+$kdbarang = $_POST['kdbarang'];
+$namabarang = $_POST['nama'];
+$stok = $_POST['stok'];
+$harga = $_POST['harga'];
 
-$query='INSERT INTO motor(id_motor, nama, merk)'.
-       'VALUES( :idmot, :nama, :merk)';
+$query='INSERT INTO barang(kodebarang, nama, stok, harga)'.
+       'VALUES( :kdbar, :nama, :stok, :harga)';
 
 $statemen=oci_parse($conn,$query);
 
-oci_bind_by_name($statemen, ':idmot', $idmotor);
-oci_bind_by_name($statemen, ':nama', $nama);
-oci_bind_by_name($statemen, ':merk', $merk);
+oci_bind_by_name($statemen, ':kdbar', $kdbarang);
+oci_bind_by_name($statemen, ':nama', $namabarang);
+oci_bind_by_name($statemen, ':stok', $stok);
+oci_bind_by_name($statemen, ':harga', $harga);
 
 $ror = oci_execute($statemen);
 
 if($ror == true) {
-	echo "<script>alert('Data berhasil disimpan');window.location = 'view_motor.php';</script>";
+	echo "<script>alert('Data berhasil disimpan');window.location = 'add.php';</script>";
 }
 else {
 	$e = oci_error();

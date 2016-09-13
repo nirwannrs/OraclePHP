@@ -1,25 +1,24 @@
 <html>
 <head>
-<title>View Motor</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>View Pelanggan</title>
 </head>
 <body>
 
 <?php
 include ("koneksi.php");
-$query="select * from motor order by id_motor asc";
+$query="select * from pelanggan order by kodepelanggan";
 $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
+include ("link.php"); 
 ?>
-<hr>
-<a href = "view_motor.php"><h2>Data Motor</a> | <a href = "view_trans">Data Transaksi</h2></a>
-<hr>
 <br>
-<h2>Data Motor</h2>
-<table border = "1" width = "100%" cellpadding = "8"> 
+<h2>Data Pelanggan</h2>
+<table border = "1" width = "100%" cellpadding = "6"> 
 <tr>
-<th><b>ID Motor</th>
-<th><b>Nama Motor</th>
-<th><b>Merk Motor</th>
+<th><b>Kode Pelanggan</th>
+<th><b>Nama Pelanggan</th>
+<th><b>Alamat</th>
 <th><b>Aksi</th>
 </tr>
 
@@ -39,7 +38,7 @@ echo "
  
 </table>
 <br>
-<a href = "add.php"><b>Tambah Data</a>
+<a href = "addpelanggan.php"><b>Tambah Data</a>
 <?php 
 oci_free_statement($statemen);
 oci_close($conn);
