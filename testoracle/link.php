@@ -6,7 +6,7 @@
       <a href="view_pelanggan.php">Pelanggan</a>
     </div>
   </li>
-  <li><a href="view_trans.php">Transaksi</a></li>
+  <li><a href="transaksi.php">Transaksi</a></li>
     <li class="dropdown">
     <a href="#" class="dropbtn">Laporan</a>
     <div class="dropdown-content">

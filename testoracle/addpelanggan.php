@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Tambah Barang</title>
+	<title>Tambah Pelanggan</title>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 <tr>
 	<td>Kode Pelanggan</td>
 	<td> : </td>
-	<td><input type="text" name="kdpelanggan" style="width:150px;"></td>
+	<td><input type="text" name="kdpelanggan" style="width:150px;" autofocus></td>
 </tr>
 <tr>
 	<td>Nama Pelanggan</td>

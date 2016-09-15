@@ -23,7 +23,7 @@ function isNumberKey(evt){
 <tr>
 	<td>Kode Barang</td>
 	<td> : </td>
-	<td><input type="text" name="kdbarang" style="width:150px;"></td>
+	<td><input type="text" name="kdbarang" style="width:150px;" autofocus></td>
 </tr>
 <tr>
 	<td>Nama Barang</td>

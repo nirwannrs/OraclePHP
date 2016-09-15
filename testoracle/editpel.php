@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Edit Barang</title>
+	<title>Edit Pelanggan</title>
 </head>
 <body>
 
@@ -15,38 +15,33 @@ function isNumberKey(evt){
 
 <?php
 include ("koneksi.php");
-$query="select * from barang where kodebarang='".$_GET['barang']."'";
+$query="select * from pelanggan where kodepelanggan='".$_GET['pelanggan']."'";
 $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
 $baris=oci_fetch_array($statemen)
 ?>
 
-<a href = "view_barang.php"><b><- Batal</a>
-<form method="post" action="aedit.php?barang=<?php echo $_GET['barang']; ?>">
+<a href = "view_pelanggan.php"><b><- Batal</a>
+<form method="post" action="aeditpel.php?pelanggan=<?php echo $_GET['pelanggan']; ?>">
 <center>
 <table border="0" width = "50%" cellpadding = "8">
 <tr>
-	<th colspan="3" align="center">Edit Data Barang</th>
+	<th colspan="3" align="center">Edit Data pelanggan</th>
 </tr>
 <tr>
-	<td>Kode Barang</td>
+	<td>Kode Pelanggan</td>
 	<td> : </td>
-	<td><input type="text" name="kdbarang" style="width:150px; background: #ccc;" value="<?php echo $baris['0']; ?>" readonly></td>
+	<td><input type="text" name="kdpel" style="width:150px; background: #ccc;" value="<?php echo $baris['0']; ?>" readonly></td>
 </tr>
 <tr>
-	<td>Nama Barang</td>
+	<td>Nama Pelanggan</td>
 	<td> : </td>
 	<td><input type="text" name="nama" value="<?php echo $baris['1']; ?>" style="width:150px;" autofocus></td>
 </tr>
 <tr>
-	<td>Stok</td>
+	<td>Alamat</td>
 	<td> : </td>
-	<td><input type="number" name="stok" value="<?php echo $baris['2']; ?>" onkeypress="return isNumberKey(event)" style="width:150px;"></td>
-</tr>
-<tr>
-	<td>Harga</td>
-	<td> : </td>
-	<td><input type="text" name="harga" value="<?php echo $baris['3']; ?>" onkeypress="return isNumberKey(event)" style="width:150px;"></td>
+	<td><input type="text" name="alamat" value="<?php echo $baris['2']; ?>" style="width:150px;"></td>
 </tr>
 <tr>
 	<td colspan="3" align="center">
