@@ -1,23 +1,21 @@
 <?php
 include "koneksi.php";
 
-$kdpelanggan = $_POST['kdpelanggan'];
-$nama = $_POST['namapelanggan'];
+$nama = $_POST['nama'];
 $alamat = $_POST['alamat'];
 
 $query='INSERT INTO pelanggan(kodepelanggan, namapelanggan, alamat)'.
-       'VALUES( :kdpel, :nama, :alamat)';
+       'VALUES(kdpelanggan_seq.nextval, :nama, :alamat)';
 
 $statemen=oci_parse($conn,$query);
 
-oci_bind_by_name($statemen, ':kdpel', $kdpelanggan);
 oci_bind_by_name($statemen, ':nama', $nama);
 oci_bind_by_name($statemen, ':alamat', $alamat);
 
 $ror = oci_execute($statemen);
 
 if($ror == true) {
-	echo "<script>alert('Data berhasil disimpan');window.location = 'addpelanggan.php';</script>";
+	echo "<script>alert('Data berhasil disimpan');window.location = 'view_pelanggan.php';</script>";
 }
 else {
 	$e = oci_error();

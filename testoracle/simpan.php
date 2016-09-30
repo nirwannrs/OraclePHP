@@ -1,17 +1,24 @@
 <?php
 include "koneksi.php";
 
-$kdbarang = $_POST['kdbarang'];
 $namabarang = $_POST['nama'];
 $stok = $_POST['stok'];
 $harga = $_POST['harga'];
 
+if (empty($namabarang))
+{
+		echo "<script>alert('Data tidak boleh kosong!');window.location = 'view_barang.php';</script>";
+}else if(empty($stok)){
+	echo "<script>alert('Data tidak boleh kosong!');window.location = 'view_barang.php';</script>";
+}else if(empty($harga)){
+	echo "<script>alert('Data tidak boleh kosong!');window.location = 'view_barang.php';</script>";
+}else{
+
 $query='INSERT INTO barang(kodebarang, nama, stok, harga)'.
-       'VALUES( :kdbar, :nama, :stok, :harga)';
+       'VALUES(kdbarang_seq.nextval, :nama, :stok, :harga)';
 
 $statemen=oci_parse($conn,$query);
 
-oci_bind_by_name($statemen, ':kdbar', $kdbarang);
 oci_bind_by_name($statemen, ':nama', $namabarang);
 oci_bind_by_name($statemen, ':stok', $stok);
 oci_bind_by_name($statemen, ':harga', $harga);
@@ -19,7 +26,7 @@ oci_bind_by_name($statemen, ':harga', $harga);
 $ror = oci_execute($statemen);
 
 if($ror == true) {
-	echo "<script>alert('Data berhasil disimpan');window.location = 'add.php';</script>";
+	echo "<script>alert('Data berhasil disimpan');window.location = 'view_barang.php';</script>";
 }
 else {
 	$e = oci_error();
@@ -32,5 +39,5 @@ oci_commit($conn);
 oci_free_statement($statemen);
 
 oci_close($conn);
-
+}
 ?>
