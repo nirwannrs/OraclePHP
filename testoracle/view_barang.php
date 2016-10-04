@@ -52,6 +52,22 @@ function isNumberKey(evt){
         return false;
     return true;
 }
+
+function liveValidation(){
+  if($("#nama").val()=="") {
+    $("#nama").attr("border", "1px solid red");
+    alert("Silakan Lengkapi Data")
+  } else if($("#stok").val()=="") {
+    $("#stok").attr("border", "1px solid red");
+    alert("Silakan Lengkapi Data")
+  } else if($("#harga").val()=="") {
+    $("#harga").attr("border", "1px solid red");
+    alert("Silakan Lengkapi Data")
+  } else {
+  $("#add-form").submit();
+  }
+}
+
 </script>
 
 
@@ -143,7 +159,8 @@ oci_close($conn);
 </tr>
 <tr>
 	<td colspan="3" align="center">
-		<input type="submit" value="Proses">
+		<input type="submit" value="Proses" style="display:none;">
+    <a href="#" onclick="liveValidation()" class="btn">Proses</a>
 		<input type="reset" value="Reset">
 	</td>
 </tr>

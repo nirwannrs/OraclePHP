@@ -1,4 +1,4 @@
-<ul>
+<ul id="navigation">
   <li class="dropdown">
     <a class="active" href="#" class="dropbtn">Master</a>
     <div class="dropdown-content">
