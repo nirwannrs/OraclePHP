@@ -1,0 +1,27 @@
+Barang
+KodeBarang || PK || NUMBER	
+Nama || VARCHAR2
+Stok || NUMBER
+Harga || VARCHAR2
+
+
+Pelanggan
+KodePelanggan || PK || NUMBER
+NamaPelanggan || VARCHAR2
+Alamat || VARCHAR2
+(Saldo Piutang) *OPSIONAL, GK GW PASANG D DB
+
+
+Jual
+NoJual || PK || NUMBER
+TglJual || DATE
+TotalFaktur || NUMBER
+KodePelanggan || FK NUMBER
+
+
+JualBarang
+NoJual || FK || NUMBER
+KodeBarang || FK || NUMBER
+Qty || NUMBER
+HargaJual || NUMBER
+HargaTotal || NUMBER
