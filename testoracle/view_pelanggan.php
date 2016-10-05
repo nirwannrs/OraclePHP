@@ -42,6 +42,20 @@ function editForm(kdpel, nama, alamat){
   return false;
 }
 
+function liveValidation(){
+  if($("#nama").val()=="") {
+    $("#nama").attr("border", "1px solid red");
+    alert("Silakan Lengkapi Data")
+    $("#nama").focus();
+  } else if($("#alamat").val()=="") {
+    $("#alamat").attr("border", "1px solid red");
+    alert("Silakan Lengkapi Data")
+    $("#alamat").focus();
+  } else {
+  $("#add-form").submit();
+  }
+}
+
 </script>
 <title>View Pelanggan</title>
 </head>
@@ -120,7 +134,8 @@ oci_close($conn);
 </tr>
 <tr>
 	<td colspan="3" align="center">
-		<input type="submit" value="Proses">
+		<input type="submit" value="Proses" style="display:none">
+		<a href="#" onclick="liveValidation()" class="btn">Proses</a>
 		<input type="reset" value="Reset">
 	</td>
 </tr>

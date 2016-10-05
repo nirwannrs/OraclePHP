@@ -1,17 +1,18 @@
-ul#navigation {
+ul#nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    font-family : Tahoma;
 }
 
-li.dropdown {
+li.navdrop {
     float: left;
-	font-size : 24px;
+    font-size : 24px;
 }
 
-li.dropdown a, .dropbtn {
+li.navdrop a, .dropbtn {
     display: inline-block;
     color: white;
     text-align: center;
@@ -19,11 +20,13 @@ li.dropdown a, .dropbtn {
     text-decoration: none;
 }
 
-li.dropdown a:hover, .dropdown:hover .dropbtn {
+li.navdrop a:hover, .dropdown:hover .dropbtn {
     background-color: blue;
 }
 
 li.dropdown {
+    float: left;
+    font-size : 24px;
     display: inline-block;
 }
 
@@ -47,4 +50,14 @@ li.dropdown {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+.btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }

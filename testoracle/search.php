@@ -1,9 +1,8 @@
 <?php
 $term = $_GET['term'];
 include ("koneksi.php");
-$query="select * from barang where kodebarang = :kodebarang";
+$query="select * from barang where kodebarang LIKE '%$term'";
 $statemen=oci_parse($conn,$query);
-oci_bind_by_name($statemen, ':kodebarang', $term);
 
 oci_execute($statemen);
 ?>

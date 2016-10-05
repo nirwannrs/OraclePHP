@@ -28,8 +28,8 @@ border-collapse:collapse;
 }
 #tabel  td
 {
-padding-left:5px;
 border: 1px solid black;
+width: 200px;
 }
 #transaksi{
 	font-size: 25px !important;
@@ -58,6 +58,7 @@ $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
 ?>
 <div id="tablePelanggan">
+<br>
 <br>
 <h2>Pilih Pelanggan</h2>
 <table border = "1" width = "100%" cellpadding = "6" id="table_id" class="display"> 
@@ -94,20 +95,22 @@ oci_close($conn);
 <div id="transaksi" style="display: none;">
 <center><table style='width:550px; font-size:8pt; font-family:calibri; border-collapse: collapse;' border = '0'>
 <td width='70%' align='left' style='padding-right:80px; vertical-align:top; font-size:10pt'>
-<span style='font-size:25pt'><b>Nama Toko</b></span></br>Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko Alamat Toko </br>Telp : 0594094545
+<span style='font-size:25pt'><b>Toko S.M.T</b></span></br>Jalan Dago No.128 Bandung</br>Telp : 0594094545
 </td>
 <td style='vertical-align:top' width='30%' align='left'>
 <b><span style='font-size:12pt'>FAKTUR PENJUALAN</span></b></br>
-No Trans. : 4</br>
-Tanggal :06 Januari 2016</br>
+No Trans. : 1</br>
+Tanggal :5 Oktober 2016</br>
 </td>
 </table>
 <table style='width:550px; font-size:8pt; font-family:calibri; border-collapse: collapse;' border = '0'>
 <td  align='left' style='padding-right:80px; vertical-align:top'>
+<br>
 <p>Nama Pelanggan : <p id="namapelanggan"></p></p>
 <p>Alamat : <p id="alamatpelanggan"></p></p>
 </td>
 <td style='vertical-align:top' width='30%' align='left'>
+<br>
 No Telp : -
 </td>
 </table>
@@ -124,42 +127,17 @@ No Telp : -
 	<tr id="barang-1">
 		<td><input type="text" name="barang-1" id="tags-1"></td>
 		<td id="nama-1"> </td>
-		<td id="harga-1"></td>
-		<td><input type="text" name="qty-1" style="width:150px;" id="qty-1"></td>
-		<td id="total-1" style='text-align:right'></td>
-		<td><a href="#" onclick="addBarang(2)" style="text-decoration: none"> + </td>
+		<td> <input type="text" name="harga-1" id="harga-1" readonly>  </td>
+		<td><input type="text" name="qty-1" style="width:150px;" id="qty-1" onkeypress="return isNumberKey(event)"></td>
+		<td id="total-1" style='text-align:right' class="subTotal"></td>
+		<td width="auto"><a href="#" onclick="addBarang(2)" style="text-decoration: none" class="btn"> Add</a> | <a href='remove' class="btn">Remove</a></td>
 	</tr>
 
 	<tr>
 		<td colspan = '5'>
 		<div style='text-align:right'>Total Yang Harus Di Bayar Adalah : </div>
 		</td>
-		<td style='text-align:right'>Rp2.460.000,00</td>
-	</tr>
-
-	<tr>
-		<td colspan = '5'>
-		<div style='text-align:right'>Cash : </div>
-		</td>
-		<td style='text-align:right'>Rp2.460.000,00</td>
-	</tr>
-	<tr>
-		<td colspan = '5'>
-		<div style='text-align:right'>Kembalian : </div>
-		</td>
-		<td style='text-align:right'>Rp0,00</td>
-	</tr>
-	<tr>
-		<td colspan = '5'>
-		<div style='text-align:right'>DP : </div>
-		</td>
-		<td style='text-align:right'>Rp0,00</td>
-	</tr>
-	<tr>
-		<td colspan = '5'>
-		<div style='text-align:right'>Sisa : </div>
-		</td>
-		<td style='text-align:right'>Rp0,00</td>
+		<td style='text-align:right' id="allTotal">0</td>
 	</tr>
 	</table></center>
 	</div>

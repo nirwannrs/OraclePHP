@@ -1,8 +1,9 @@
 $( function() {
   	$("#qty-1").on("change paste keyup", function() {
-    $("#total-1").text($("#harga-1").text()*$("#qty-1").val()); 
+    $("#total-1").text($("#harga-1").val()*$("#qty-1").val()); 
 	});
-    autoComplete(1);    
+    autoComplete(1);
+	onChangeValue(1);
   } );
 
   $( function() {
@@ -15,16 +16,29 @@ $( function() {
 
   function onChangeValue(id){
     $("#qty-"+id).on("change paste keyup", function() {
-    $("#total-"+id).text($("#harga-"+id).text()*$("#qty-"+id).val()); 
+      $("#total-"+id).text($("#harga-"+id).val()*$("#qty-"+id).val()); 
+	  var empty = 0;
+	  $(".subTotal").each(function(i){
+		  empty = empty + new Number($(this).text());
+		  console.log(empty);
+	  })
+	  $("#allTotal").text(empty);
   });
   }
 
 
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+  
   function autoComplete(id){
     $( "#tags-"+id ).autocomplete({
       source: function( request, response ) {
         $.ajax( {
-          url: "/Oraclephp/testoracle/search.php",
+          url: "/testoracle/search.php",
           dataType: "json",
           data: {
             term: request.term
@@ -44,7 +58,7 @@ $( function() {
       minLength: 1,
       select: function( event, ui ) {
         $("#nama-"+id).text(ui.item.nama);
-        $("#harga-"+id).text(ui.item.harga);
+        $("#harga-"+id).val(ui.item.harga);
         // log( "Selected: " + ui.item.value + " aka " + ui.item.id );
       }
     });
@@ -61,7 +75,7 @@ $( function() {
 }
 
 function addBarang(id){
-  $('#barang-1').after("<tr id='barang-"+id+"'><td><input type='text' name='barang-"+id+"' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td id='harga-"+id+"'></td><td><input type='text' name='qty-"+id+"' style='width:150px;' id='qty"+id+"'></td><td id='total"+id+"' style='text-align:right'></td><td><a href='#' onclick='addBarang("+id+")' style='text-decoration: none'> + </td></tr>");
+$('#barang-1').after("<tr id='barang-"+id+"'><td><input type='text' name='barang-"+id+"' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='harga-"+id+"' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty-"+id+"' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'><a href='#' onclick='addBarang("+id+")' style='text-decoration: none' class='btn'> Add</a> | <a href='remove'>Remove</a></td></tr>");
   autoComplete(id);
   onChangeValue(id);
 }
