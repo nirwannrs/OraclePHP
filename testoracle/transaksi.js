@@ -1,13 +1,6 @@
-$( function() {
-  	$("#qty-1").on("change paste keyup", function() {
-    $("#total-1").text($("#harga-1").val()*$("#qty-1").val()); 
-	});
-    autoComplete(1);
-	onChangeValue(1);
-  } );
-
   $( function() {
     $( "#datepicker" ).datepicker();
+    $("#date").text($.datepicker.formatDate('dd M yy', new Date()));
     $('#table_id').DataTable({
 		"pageLength": 15,
 		"lengthMenu": [ 15, 30, 50, 75, 100 ]
@@ -50,9 +43,6 @@ $( function() {
             var arrayCol = 0;
             $.map( data, function( item ) {
               for (i = 0; i < $('.ui-autocomplete-input').length; i++) {
-                console.log(i);
-                console.log("test" + item.KODEBARANG);
-                console.log($($('.ui-autocomplete-input')[i]).val());
                   if($($('.ui-autocomplete-input')[i]).val() == item.KODEBARANG){
                     if(arrayCol == 0){
                       arrayCol = arrayCol+1;
@@ -61,9 +51,7 @@ $( function() {
                       newData = jQuery.grep(newData, function(value) {
                         return value != item;
                       });
-                      console.log(newData);
                     }
-                    console.log(arrayCol);
                   }
                 }
             });
@@ -84,7 +72,6 @@ $( function() {
         $("#tags-"+id).attr("readonly", true);
         $("#nama-"+id).text(ui.item.nama);
         $("#harga-"+id).val(ui.item.harga);
-        // log( "Selected: " + ui.item.value + " aka " + ui.item.id );
       }
     });
 
@@ -108,7 +95,7 @@ function addBarang(id){
   if(id == 0){
     id = $(".barang-details").length + 1;  
   }
-  $('#barang-field').before("<tr id='barang-"+id+"' class='barang-details'><td><input type='text' name='barang-"+id+"' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='harga-"+id+"' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty-"+id+"' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'> <a href='#' onclick='removeElement("+id+")'>Remove</a></td></tr>");
+  $('#barang-field').before("<tr id='barang-"+id+"' class='barang-details'><td><input type='text' name='barang["+id+"]' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='harga["+id+"]' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty["+id+"]' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'> <a href='#' onclick='removeElement("+id+")'>Remove</a></td></tr>");
   autoComplete(id);
   onChangeValue(id);
 }
