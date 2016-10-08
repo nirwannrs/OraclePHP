@@ -124,15 +124,8 @@ No Telp : -
 	<td width='13%'>Harga</td>
 	<td width='4%'>Qty</td>
 	<td width='13%'>Total Harga</td>
-	<tr id="barang-1">
-		<td><input type="text" name="barang-1" id="tags-1"></td>
-		<td id="nama-1"> </td>
-		<td> <input type="text" name="harga-1" id="harga-1" readonly>  </td>
-		<td><input type="text" name="qty-1" style="width:150px;" id="qty-1" onkeypress="return isNumberKey(event)"></td>
-		<td id="total-1" style='text-align:right' class="subTotal"></td>
-		<td width="auto"><a href="#" onclick="addBarang(2)" style="text-decoration: none" class="btn"> Add</a> | <a href='remove' class="btn">Remove</a></td>
-	</tr>
-
+	<td><a href='#' onclick='addBarang(0)' style='text-decoration: none' class='btn'> Add</a></td>
+	<tr id='barang-field'></tr>
 	<tr>
 		<td colspan = '5'>
 		<div style='text-align:right'>Total Yang Harus Di Bayar Adalah : </div>

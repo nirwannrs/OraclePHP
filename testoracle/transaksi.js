@@ -17,15 +17,17 @@ $( function() {
   function onChangeValue(id){
     $("#qty-"+id).on("change paste keyup", function() {
       $("#total-"+id).text($("#harga-"+id).val()*$("#qty-"+id).val()); 
-	  var empty = 0;
-	  $(".subTotal").each(function(i){
-		  empty = empty + new Number($(this).text());
-		  console.log(empty);
-	  })
-	  $("#allTotal").text(empty);
+	  calculateTotal();
   });
   }
 
+  function calculateTotal(){
+    var empty = 0;
+    $(".subTotal").each(function(i){
+      empty = empty + new Number($(this).text());
+    })
+    $("#allTotal").text(empty);
+  } 
 
   function isNumberKey(evt){
     var charCode = (evt.which) ? evt.which : event.keyCode
@@ -38,13 +40,35 @@ $( function() {
     $( "#tags-"+id ).autocomplete({
       source: function( request, response ) {
         $.ajax( {
-          url: "/testoracle/search.php",
+          url: "/Oraclephp/testoracle/search.php",
           dataType: "json",
           data: {
             term: request.term
           },
           success: function( data ) {
-            response( $.map( data, function( item ) {
+            var newData = [];
+            var arrayCol = 0;
+            $.map( data, function( item ) {
+              for (i = 0; i < $('.ui-autocomplete-input').length; i++) {
+                console.log(i);
+                console.log("test" + item.KODEBARANG);
+                console.log($($('.ui-autocomplete-input')[i]).val());
+                  if($($('.ui-autocomplete-input')[i]).val() == item.KODEBARANG){
+                    if(arrayCol == 0){
+                      arrayCol = arrayCol+1;
+                      newData.push(item);
+                    }else{
+                      newData = jQuery.grep(newData, function(value) {
+                        return value != item;
+                      });
+                      console.log(newData);
+                    }
+                    console.log(arrayCol);
+                  }
+                }
+            });
+            
+            response( $.map( newData, function( item ) {
                 return {
                     label: item.KODEBARANG,
                     value: item.KODEBARANG,
@@ -57,6 +81,7 @@ $( function() {
       },
       minLength: 1,
       select: function( event, ui ) {
+        $("#tags-"+id).attr("readonly", true);
         $("#nama-"+id).text(ui.item.nama);
         $("#harga-"+id).val(ui.item.harga);
         // log( "Selected: " + ui.item.value + " aka " + ui.item.id );
@@ -74,8 +99,16 @@ $( function() {
   return false;
 }
 
+  function removeElement(id){
+    $("#barang-"+id).remove();
+    calculateTotal();
+  }
+
 function addBarang(id){
-$('#barang-1').after("<tr id='barang-"+id+"'><td><input type='text' name='barang-"+id+"' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='harga-"+id+"' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty-"+id+"' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'><a href='#' onclick='addBarang("+id+")' style='text-decoration: none' class='btn'> Add</a> | <a href='remove'>Remove</a></td></tr>");
+  if(id == 0){
+    id = $(".barang-details").length + 1;  
+  }
+  $('#barang-field').before("<tr id='barang-"+id+"' class='barang-details'><td><input type='text' name='barang-"+id+"' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='harga-"+id+"' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty-"+id+"' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'> <a href='#' onclick='removeElement("+id+")'>Remove</a></td></tr>");
   autoComplete(id);
   onChangeValue(id);
 }
