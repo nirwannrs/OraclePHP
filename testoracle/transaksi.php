@@ -100,7 +100,7 @@ oci_close($conn);
 <td style='vertical-align:top' width='30%' align='left'>
 <b><span style='font-size:12pt'>FAKTUR PENJUALAN</span></b></br>
 No Trans. : 1</br>
-Tanggal :5 Oktober 2016</br>
+Tanggal :<p id='date'></p></br>
 </td>
 </table>
 <table style='width:550px; font-size:8pt; font-family:calibri; border-collapse: collapse;' border = '0'>
@@ -109,13 +109,9 @@ Tanggal :5 Oktober 2016</br>
 <p>Nama Pelanggan : <p id="namapelanggan"></p></p>
 <p>Alamat : <p id="alamatpelanggan"></p></p>
 </td>
-<td style='vertical-align:top' width='30%' align='left'>
-<br>
-No Telp : -
-</td>
 </table>
 
-<form method="post" action="simpan.php">
+<form method="post" action="simpantransaksi.php">
 	<table cellspacing='0' style='width:550px; font-size:8pt; font-family:calibri;  border-collapse: collapse;' border='1'>
 	<input type="hidden" name="pembeli" style="width:150px;" id="idpelanggan">
 	<tr align='center'>
@@ -124,73 +120,23 @@ No Telp : -
 	<td width='13%'>Harga</td>
 	<td width='4%'>Qty</td>
 	<td width='13%'>Total Harga</td>
-	<tr id="barang-1">
-		<td><input type="text" name="barang-1" id="tags-1"></td>
-		<td id="nama-1"> </td>
-		<td> <input type="text" name="harga-1" id="harga-1" readonly>  </td>
-		<td><input type="text" name="qty-1" style="width:150px;" id="qty-1" onkeypress="return isNumberKey(event)"></td>
-		<td id="total-1" style='text-align:right' class="subTotal"></td>
-		<td width="auto"><a href="#" onclick="addBarang(2)" style="text-decoration: none" class="btn"> Add</a> | <a href='remove' class="btn">Remove</a></td>
-	</tr>
-
+	<td><a href='#' onclick='addBarang(0)' style='text-decoration: none' class='btn'> Add</a></td>
+	<tr id='barang-field'></tr>
 	<tr>
 		<td colspan = '5'>
 		<div style='text-align:right'>Total Yang Harus Di Bayar Adalah : </div>
 		</td>
 		<td style='text-align:right' id="allTotal">0</td>
-	</tr>
-	</table></center>
-	</div>
-</form>
-
-  <div id="transaksi2" style="display:none;">
-<div>
-	<p id="namapelanggan"></p>
-	<p id="alamatpelanggan"></p>
-</div>
-
-	<h2>Transaksi</h2>
-	<form method="post" action="simpan.php">
-	<table border="0" width = "50%" cellpadding = "8">
-	<tr>
-		<td>No Jual</td>
-		<td> : </td>
-		<td><input type="text" name="nojual" style="width:150px;"></td>
-	</tr>
-	<tr>
-		<td>Tanggal Jual</td>
-		<td> : </td>
-		<td><input type="text" name="tgljual" style="width:150px;" id="datepicker"></td>
-	</tr>
-	
-	<tr>
-		<td>Barang</td>
-		<td> : </td>
-		<td><input type="text" name="barang" style="width:150px;"></td>
-	</tr>
-	<tr>
-		<td>Harga</td>
-		<td> : </td>
-		<td><input type="text" name="harga" onkeypress="return isNumberKey(event)" style="width:150px; background: #ccc;" readonly></td>
-	</tr>
-	<tr>
-		<td>Jumlah</td>
-		<td> : </td>
-		<td><input type="number" name="qty" onkeypress="return isNumberKey(event)" style="width:150px;"></td>
-	</tr>
-	<tr>
-	<tr>
-		<td>Total</td>
-		<td> : </td>
-		<td><input type="text" name="total" onkeypress="return isNumberKey(event)" style="width:150px; background: #ccc;" readonly></td>
-	</tr>
-		<td colspan="3" align="center">
-			<input type="submit" value="Proses">
-			<input type="reset" value="Reset">
-		</td>
+		<input type="hidden" id="hargatotal" name="totalharga">
 	</tr>
 	</table>
-	</form>
+	</br>
+	<input type="submit" value="Proses">
+	</center>
+	</div>
+
+</form>
+
   </div>
 </body>
 </html>
