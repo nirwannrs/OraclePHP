@@ -10,7 +10,11 @@
   function onChangeValue(id){
     $("#qty-"+id).on("change paste keyup", function() {
       $("#total-"+id).text($("#harga-"+id).val()*$("#qty-"+id).val()); 
+<<<<<<< HEAD
     calculateTotal();
+=======
+	  calculateTotal();
+>>>>>>> 9752d952165a44df35599cb1a9f2df417e329f03
   });
   }
 
@@ -20,7 +24,10 @@
       empty = empty + new Number($(this).text());
     })
     $("#allTotal").text(empty);
+<<<<<<< HEAD
     $("#hargatotal").attr("value", empty);
+=======
+>>>>>>> 9752d952165a44df35599cb1a9f2df417e329f03
   } 
 
   function isNumberKey(evt){
