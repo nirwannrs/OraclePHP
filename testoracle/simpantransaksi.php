@@ -51,7 +51,7 @@ oci_free_statement($statemen_details);
 
 oci_commit($conn);
 
-echo "<script>alert('Data berhasil disimpan');window.location = 'transaksi.php';</script>";
+echo "<script>alert('Data berhasil disimpan');window.location = 'view_transaksi.php?data=".$id."';</script>";
 
 /* $values = "[";
 foreach ($barang as $key => $value) {

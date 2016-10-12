@@ -54,9 +54,9 @@ include ("link.php");
   <?php
 include ("koneksi.php");
 $query="select * from pelanggan order by kodepelanggan";
-$nextSec = "jual_seq.nextval";
+$nextSec = "SELECT * FROM jual WHERE nojual = ( SELECT MAX(nojual) FROM jual )";
 $statemen2 = oci_parse($conn, $nextSec);
-$statemen=oci_parse($conn,$query);
+$statemen= oci_parse($conn,$query);
 oci_execute($statemen);
 oci_execute($statemen2);
 ?>
@@ -102,7 +102,11 @@ oci_close($conn);
 </td>
 <td style='vertical-align:top' width='30%' align='left'>
 <b><span style='font-size:12pt'>FAKTUR PENJUALAN</span></b></br>
-No Trans. : 1</br>
+<?php
+$baris=oci_fetch_array($statemen2);
+$sec = $baris['0'] + 1;
+?>
+No Trans. : <?php echo "$sec"; ?></br>
 Tanggal :<p id='date'></p></br>
 </td>
 </table>
