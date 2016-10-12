@@ -1,12 +1,11 @@
 <?php
 include "koneksi.php";
-<<<<<<< HEAD
 $kdnama = $_POST['pembeli'];
-$barang = array($_POST['barang']);
+$barang = $_POST['barang'];
 $harga = $_POST['harga'];
 $qty = $_POST['qty'];
 $total = $_POST['totalharga'];
-$counterbarang = count($barang);
+$stok = $_POST['stok'];
 
 $query='INSERT INTO jual(nojual, tgljual, totalfaktur, kodepelanggan)'.
        'VALUES(jual_seq.nextval, sysdate, :total, :kode) returning nojual into :id';
@@ -21,22 +20,29 @@ oci_bind_by_name($statemen, ':id', $id);
 oci_execute($statemen);
 
 
-for($x=0;$x<$counterbarang;$x++){
+foreach ($barang as $key => $value){
 $query_details='INSERT INTO jualbarang(nojual, kodebarang, qty, hargajual, hargatotal)'.
        'VALUES(:id, :barang, :qty, :harga, :total)'; 
 
+$query_child='UPDATE barang SET stok = :stok where kodebarang = :parent_id';
+
 $statemen_details=oci_parse($conn,$query_details);
+$query_child=oci_parse($conn, $query_child);
+
+$subtotal = ($harga[$key]*$qty[$key]);
+$newStok = $stok[$key] - $qty[$key];
+$idBarang = $barang[$key];
 
 oci_bind_by_name($statemen_details, ':id', $id);
-oci_bind_array_by_name($statemen_details, ':barang', $barang, 5, 1, SQLT_INT);
-oci_bind_array_by_name($statemen_details, ':qty', $qty, 5, 1, SQLT_INT);
-oci_bind_array_by_name($statemen_details, ':harga', $harga, 5, 1, SQLT_INT);
-oci_bind_by_name($statemen_details, ':total', $total);
-
-
-echo "$id, $barang, $qty, $harga";
+oci_bind_by_name($statemen_details, ':barang', $idBarang);
+oci_bind_by_name($statemen_details, ':qty', $qty[$key]);
+oci_bind_by_name($statemen_details, ':harga', $harga[$key]);
+oci_bind_by_name($statemen_details, ':total', $subtotal);
+oci_bind_by_name($query_child, ':stok', $newStok);
+oci_bind_by_name($query_child, ':parent_id', $idBarang);
 
 oci_execute($statemen_details);
+oci_execute($query_child);
 }
 
 
@@ -45,23 +51,9 @@ oci_free_statement($statemen_details);
 
 oci_commit($conn);
 
+echo "<script>alert('Data berhasil disimpan');window.location = 'transaksi.php';</script>";
+
 /* $values = "[";
-=======
-$nama = $_POST['pembeli'];
-$barang = $_POST['barang'];
-$harga = $_POST['harga'];
-$qty = $_POST['qty'];
-
-$query='INSERT INTO jual(nojual, tgljual, kodepelanggan)'.
-       'VALUES(jual_seq.nextval, sysdate, :pelanggan) returning nojual into :id';
-
-$statemen=oci_parse($conn,$query);
-
-oci_bind_by_name($statemen, ':pelanggan', $nama);
-oci_bind_by_name($statemen,":id",$id);
-
-$values = "[";
->>>>>>> 9752d952165a44df35599cb1a9f2df417e329f03
 foreach ($barang as $key => $value) {
 	$values = $values + "'" + $id + "','" + $value +"', '"+ $qty[$key] + "', '" + $harga[$key] + "' , '" + $harga[$key] * $qty[$key] + "'";
 }
@@ -71,21 +63,8 @@ echo $values;
 $query_details='INSERT INTO jualbarang(nojual, kodebarang, qty, hargajual, hargatotal)'.
        'VALUES('+ $values +')';
 
-<<<<<<< HEAD
 
 oci_close($conn);
 */
-=======
-$statemen_details=oci_parse($conn,$query_details);
-
-oci_execute($statemen);
-oci_execute($statemen_details);
-
-oci_commit($conn);
-oci_free_statement($statemen);
-oci_free_statement($statemen_details);
-
-oci_close($conn);
->>>>>>> 9752d952165a44df35599cb1a9f2df417e329f03
 
 ?>

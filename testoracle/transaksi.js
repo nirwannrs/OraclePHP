@@ -9,12 +9,21 @@
 
   function onChangeValue(id){
     $("#qty-"+id).on("change paste keyup", function() {
-      $("#total-"+id).text($("#harga-"+id).val()*$("#qty-"+id).val()); 
-<<<<<<< HEAD
-    calculateTotal();
-=======
-	  calculateTotal();
->>>>>>> 9752d952165a44df35599cb1a9f2df417e329f03
+      var qty = new Number($("#qty-"+id).val());
+      var stok = new Number($("#stok-"+id).val());
+    
+      if( qty <= stok){
+        $("#total-"+id).text($("#harga-"+id).val()*$("#qty-"+id).val()); 
+      }else{
+        if(qty == 0){
+          $("#qty-"+id).val(0);
+        }else{
+          $("#qty-"+id).val(stok);
+          $("#qty-"+id).trigger("change");
+        }
+      }
+
+      calculateTotal();
   });
   }
 
@@ -24,10 +33,7 @@
       empty = empty + new Number($(this).text());
     })
     $("#allTotal").text(empty);
-<<<<<<< HEAD
     $("#hargatotal").attr("value", empty);
-=======
->>>>>>> 9752d952165a44df35599cb1a9f2df417e329f03
   } 
 
   function isNumberKey(evt){
@@ -69,7 +75,8 @@
                     label: item.KODEBARANG,
                     value: item.KODEBARANG,
                     nama: item.NAMA,
-                    harga: item.HARGA
+                    harga: item.HARGA,
+                    stok: item.STOK
                 }
             }));
           }
@@ -80,6 +87,8 @@
         $("#tags-"+id).attr("readonly", true);
         $("#nama-"+id).text(ui.item.nama);
         $("#harga-"+id).val(ui.item.harga);
+        $("#stok-"+id).val(ui.item.stok)
+        $("#qty-"+id).focus();
       }
     });
 
@@ -103,7 +112,8 @@ function addBarang(id){
   if(id == 0){
     id = $(".barang-details").length + 1;  
   }
-  $('#barang-field').before("<tr id='barang-"+id+"' class='barang-details'><td><input type='text' name='barang["+id+"]' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='harga["+id+"]' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty["+id+"]' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'> <a href='#' onclick='removeElement("+id+")'>Remove</a></td></tr>");
+  $('#barang-field').before("<tr id='barang-"+id+"' class='barang-details'><td><input type='text' name='barang["+id+"]' id='tags-"+id+"'></td><td id='nama-"+id+"'> </td><td> <input type='text' name='stok["+id+"]' id='stok-"+id+"' readonly> </td><td> <input type='text' name='harga["+id+"]' id='harga-"+id+"' readonly> </td><td><input type='text' name='qty["+id+"]' style='width:150px;' id='qty-"+id+"'  onkeypress='return isNumberKey(event)'></td><td id='total-"+id+"' style='text-align:right' class='subTotal'></td><td width='auto'> <a href='#' onclick='removeElement("+id+")'>Remove</a></td></tr>");
+  $("#tags-"+id).focus();
   autoComplete(id);
   onChangeValue(id);
 }

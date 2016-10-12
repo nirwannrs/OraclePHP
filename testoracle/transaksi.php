@@ -54,8 +54,11 @@ include ("link.php");
   <?php
 include ("koneksi.php");
 $query="select * from pelanggan order by kodepelanggan";
+$nextSec = "jual_seq.nextval";
+$statemen2 = oci_parse($conn, $nextSec);
 $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
+oci_execute($statemen2);
 ?>
 <div id="tablePelanggan">
 <br>
@@ -117,6 +120,7 @@ Tanggal :<p id='date'></p></br>
 	<tr align='center'>
 	<td width='10%'>Kode Barang</td>
 	<td width='20%'>Nama Barang</td>
+	<td width='20%'>Stock Barang</td>
 	<td width='13%'>Harga</td>
 	<td width='4%'>Qty</td>
 	<td width='13%'>Total Harga</td>

@@ -2,10 +2,12 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="datatable.css">
+
 <script src="jquery.js"></script>
 <script src="jquery-datatable.js"></script>
 <script src="jquery-modal-min.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" href="jquery-modal-min.css" type="text/css" media="screen" />
+
 
 <script type="text/javascript">
 $(document).ready( function () {
