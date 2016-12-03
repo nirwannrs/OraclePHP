@@ -83,6 +83,10 @@ include ("koneksi.php");
 $query="select * from jualbarang where nojual=$nojual";
 $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
+
+$query2="select totalfaktur from jual where nojual=$nojual";
+$statemen2=oci_parse($conn, $query2);
+oci_execute($statemen2);
 include ("link.php"); 
 ?>
 <br>
@@ -108,12 +112,19 @@ $nama = str_replace(" ", "_", $baris['1']);
 echo "<td>".ucwords($baris['0'])."</td>";
 echo "<td>".ucwords($baris['1'])."</td>";
 echo "<td>".ucwords($baris['2'])."</td>";
-echo "<td>".ucwords($baris['3'])."</td>";
-echo "<td>".ucwords($baris['4'])."</td>";
+echo "<td>Rp. ".number_format($baris['3'], 0, ".", ".")."</td>";
+echo "<td>Rp. ".number_format($baris['4'], 0, ".", ".")."</td>";
+echo "</tr>";
+}
+
+while($baris2=oci_fetch_array($statemen2))
+{
+echo "<tr>";
+echo "<td colspan='4' align='right'>Total Faktur</td>";
+echo "<td>Rp. ".number_format($baris2['0'], 0, ".", ".")."</td>";
 echo "</tr>";
 }
 ?>
-
 </tbody>
 </table>
 <p id="demo"></p>

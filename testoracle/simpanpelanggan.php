@@ -4,8 +4,7 @@ include "koneksi.php";
 $nama = $_POST['nama'];
 $alamat = $_POST['alamat'];
 
-$query='INSERT INTO pelanggan(kodepelanggan, namapelanggan, alamat)'.
-       'VALUES(kdpelanggan_seq.nextval, :nama, :alamat)';
+$query='BEGIN insert_pelanggan(:nama, :alamat); END;';
 
 $statemen=oci_parse($conn,$query);
 

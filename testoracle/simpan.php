@@ -14,8 +14,7 @@ if (empty($namabarang))
 	echo "<script>alert('Data tidak boleh kosong!');window.location = 'view_barang.php';</script>";
 }else{
 
-$query='INSERT INTO barang(kodebarang, nama, stok, harga)'.
-       'VALUES(kdbarang_seq.nextval, :nama, :stok, :harga)';
+$query='BEGIN Insert_barang(:nama, :stok, :harga, 1); END;';
 
 $statemen=oci_parse($conn,$query);
 

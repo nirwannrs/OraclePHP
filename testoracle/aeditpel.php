@@ -5,7 +5,8 @@ $kdpel = $_GET['pelanggan'];
 $nama = $_POST['nama'];
 $alamat = $_POST['alamat'];
 
-$query = "UPDATE pelanggan SET namapelanggan=:nama, alamat=:alamat WHERE kodepelanggan=:kdpel";
+/* $query = "UPDATE pelanggan SET namapelanggan=:nama, alamat=:alamat WHERE kodepelanggan=:kdpel"; */
+$query = "BEGIN update_pelanggan(:kdpel, :nama, :alamat); END;";
 $statemen=oci_parse($conn,$query);
 
 oci_bind_by_name($statemen, ':kdpel', $kdpel);

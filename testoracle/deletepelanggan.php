@@ -1,7 +1,7 @@
 <?php
 include "koneksi.php";
 
-$query="delete from pelanggan where kodepelanggan ='".$_GET['pelanggan']."'";
+$query="BEGIN delete_pelanggan('".$_GET['pelanggan']."'); END;";
 $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
 

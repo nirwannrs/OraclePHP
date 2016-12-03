@@ -79,7 +79,7 @@ function liveValidation(){
 
 <?php
 include ("koneksi.php");
-$query="select * from barang order by kodebarang";
+$query="select * from barang where status = 1 order by kodebarang";
 $statemen=oci_parse($conn,$query);
 oci_execute($statemen);
 include ("link.php"); 
@@ -105,7 +105,7 @@ $nama = str_replace(" ", "_", $baris['1']);
 echo "<td>".ucwords($baris['0'])."</td>";
 echo "<td>".ucwords($baris['1'])."</td>";
 echo "<td>".ucwords($baris['2'])."</td>";
-echo "<td>".ucwords($baris['3'])."</td>";
+echo "<td> Rp. ".number_format($baris['3'], 0, ".", ".")."</td>";
 echo "<td><a href = '#' onclick=editForm(".$baris['0'].",'".$nama."','".$baris['2']."','".$baris['3']."');><button> Edit </button></a> | <button onclick='myFunction()'>Delete</button></td>";
 //echo "<td><a href = 'edit.php?barang=".$baris['0']."'><button>Edit</button></a> | <button onclick='myFunction()'>Delete</button></td>";
 echo "</tr>";

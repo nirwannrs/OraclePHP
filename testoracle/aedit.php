@@ -6,7 +6,9 @@ $nama = $_POST['nama'];
 $stok = $_POST['stok'];
 $harga = $_POST['harga'];
 
-$query = "UPDATE barang SET nama=:nama, stok=:stok, harga=:harga WHERE kodebarang=:kdbar";
+/* $query = "UPDATE barang SET nama=:nama, stok=:stok, harga=:harga WHERE kodebarang=:kdbar"; */
+$query = "BEGIN update_barang(:kdbar, :nama, :stok, :harga); END;";
+
 $statemen=oci_parse($conn,$query);
 
 oci_bind_by_name($statemen, ':kdbar', $kdbar);
